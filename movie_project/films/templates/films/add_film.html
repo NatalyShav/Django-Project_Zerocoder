@@ -1,0 +1,53 @@
+{% load static %}
+
+{% block title %}
+<title>Добавить фильм</title>
+{% endblock %}
+
+{% block content %}
+
+<div class="card shadow-sm p-4">
+  <h2 class="mb-4">Форма для добавления фильма</h2>
+  <form method="post" class="needs-validation" novalidate>
+    {% csrf_token %}
+    <div class="mb-3">
+      {{ form.title }}
+      <div class="invalid-feedback">
+        Пожалуйста, введите название фильма.
+      </div>
+    </div>
+    <div class="mb-3">
+      {{ form.description }}
+      <div class="invalid-feedback">
+        Пожалуйста, введите описание.
+      </div>
+    </div>
+    <div class="mb-3">
+      {{ form.review }}
+      <div class="invalid-feedback">
+        Пожалуйста, введите отзыв.
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Добавить фильм</button>
+  </form>
+  <p> {{ error }} </p>
+</div>
+
+<!-- Скрипт для Bootstrap валидации -->
+<script>
+(function () {
+  'use strict'
+  const forms = document.querySelectorAll('.needs-validation')
+  Array.from(forms).forEach(function (form) {
+    form.addEventListener('submit', function (event) {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+      form.classList.add('was-validated')
+    }, false)
+  })
+})();
+</script>
+
+{% endblock %}
